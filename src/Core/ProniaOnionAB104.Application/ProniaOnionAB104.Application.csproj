@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ProniaOnionAB104.Domain\ProniaOnionAB104.Domain.csproj" />
   </ItemGroup>
 
