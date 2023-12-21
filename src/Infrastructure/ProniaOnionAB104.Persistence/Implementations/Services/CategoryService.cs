@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ProniaApi.Application.DTOs.Category;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
@@ -9,19 +10,18 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository repository)
+        public CategoryService(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task CreateAsync(CategoryCreateDto createCategoryDto)
         {
-            Category category = new Category
-            {
-                Name = createCategoryDto.Name
-            };
-            await _repository.AddAsync(category);
+            await _repository.AddAsync(_mapper.Map<Category>(createCategoryDto));
+
             await _repository.SaveChangesAsync();
         }
 
@@ -29,13 +29,9 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
         {
             ICollection<Category> categories = await _repository.GetAllAsync(skip: (page - 1) * take, take: take, IsTracking: false).ToListAsync();
 
-            ICollection<CategoryItemDto> getCategoryDtos = new List<CategoryItemDto>();
-
-            foreach (Category category in categories)
-            {
-                getCategoryDtos.Add(new CategoryItemDto(category.Id, category.Name));
-            }
-            return getCategoryDtos;
+            ICollection<CategoryItemDto> categoryItemDtos = _mapper.Map<ICollection<CategoryItemDto>>(categories);
+            
+            return categoryItemDtos;
         }
 
 

@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "nKxyIpqJKrPjYUaotOtaK6uV6TBH+zexbgwM7FHxV+g5z5HDvDu1eAbJeDiRNYdy4Srbsojn+zEs0OFmU5AQVQ==",
+  "dgSpecHash": "LZ9ZNar3oMcpW7x14/cMucHoOpjLfX5oaQpCOnm/yJn0RZZF8RPYDyt1SeQCPo75ebAprKfNXMaI0CKGO9oJqw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Xeyal\\Desktop\\ProniaOnionAB104\\src\\Infrastructure\\ProniaOnionAB104.Persistence\\ProniaOnionAB104.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Xeyal\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\automapper.collection\\9.0.0\\automapper.collection.9.0.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Xeyal\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

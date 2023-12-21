@@ -73,3 +73,5 @@ C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\ob
 C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\obj\Debug\net6.0\ProniaOnionAB104.API.pdb
 C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\obj\Debug\net6.0\ProniaOnionAB104.API.genruntimeconfig.cache
 C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\obj\Debug\net6.0\ref\ProniaOnionAB104.API.dll
+C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\bin\Debug\net6.0\AutoMapper.Collection.dll
+C:\Users\Xeyal\Desktop\ProniaOnionAB104\src\Presentation\ProniaOnionAB104.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

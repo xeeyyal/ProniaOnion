@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "CDYKAybmn+Xc+5EJ+EXpndHWYdTRBOBOamJehQJ6EFtI4zWQkWezgnr2sN+n2X8b1PBOM90sDkKeDvKNmhcI8Q==",
+  "dgSpecHash": "5qZMmjwJt6CBUlwMVqTLAk6tY/kSCdHBoInBSZLvSLgUi6oYruixRvuyBopKISYlegSBRQwjsM31aPshjGuL9Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Xeyal\\Desktop\\ProniaOnionAB104\\src\\Core\\ProniaOnionAB104.Application\\ProniaOnionAB104.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Xeyal\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\automapper.collection\\9.0.0\\automapper.collection.9.0.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Xeyal\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

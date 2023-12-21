@@ -2,7 +2,7 @@
 
 namespace ProniaOnionAB104.Application.Abstractions.Repositories
 {
-    internal interface ITagRepository : IRepository<Tag>
+    public interface ITagRepository : IRepository<Tag>
     {
     }
 }

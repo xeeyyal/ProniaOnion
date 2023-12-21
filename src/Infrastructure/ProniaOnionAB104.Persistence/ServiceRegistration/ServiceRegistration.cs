@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
 using ProniaOnionAB104.Persistence.Contexts;
+using ProniaOnionAB104.Persistence.Implementations.Repositories;
 using ProniaOnionAB104.Persistence.Implementations.Services;
 
 namespace ProniaOnionAB104.Persistence.ServiceRegistration
