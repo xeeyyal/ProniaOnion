@@ -28,7 +28,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
 
         public async Task<ICollection<TagItemDto>> GetAllAsync(int page, int take)
         {
-            ICollection<Tag> tags = await _repository.GetAllAsync(skip: (page - 1) * take, take: take, IsTracking: false).ToListAsync();
+            ICollection<Tag> tags = await _repository.GetAllAsync(skip: (page - 1) * take, take: take, IsTracking: false, isDeleted: true).ToListAsync();
 
             ICollection<TagItemDto> tagItemDtos = new List<TagItemDto>();
 
@@ -38,8 +38,6 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
             }
             return tagItemDtos;
         }
-
-
         public async Task UpdateAsync(int id, TagUpdateDto tagUpdateDto)
         {
             Tag tag = await _repository.GetByIdAsync(id);
@@ -58,6 +56,13 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
             if (tag is null) throw new Exception("Not found");
 
             _repository.Delete(tag);
+            await _repository.SaveChangesAsync();
+        }
+        public async Task SoftDeleteAsync(int id)
+        {
+            Tag tag = await _repository.GetByIdAsync(id);
+            if (tag is null) throw new Exception("Not found");
+            _repository.SoftDelete(tag);
             await _repository.SaveChangesAsync();
         }
 

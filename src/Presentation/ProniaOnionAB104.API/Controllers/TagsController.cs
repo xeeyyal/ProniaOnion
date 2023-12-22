@@ -48,8 +48,7 @@ namespace ProniaOnionAB104.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (id <= 0) return StatusCode(StatusCodes.Status400BadRequest);
-
-            await _service.DeleteAsync(id);
+            await _service.SoftDeleteAsync(id);
             return NoContent();
         }
     }

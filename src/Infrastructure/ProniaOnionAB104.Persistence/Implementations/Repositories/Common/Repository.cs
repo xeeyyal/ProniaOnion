@@ -2,12 +2,7 @@
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Domain.Entities;
 using ProniaOnionAB104.Persistence.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
 {
@@ -30,6 +25,11 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
         {
             _table.Remove(entity);
         }
+        public void SoftDelete(T item)
+        {
+            item.IsDeleted = true;
+            _table.Update(item);
+        }
         public IQueryable<T> GetAllAsync(
             Expression<Func<T, bool>>? expression = null,
             Expression<Func<T, object>>? orderExpression = null,
@@ -37,6 +37,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
             int skip = 0,
             int take = 0,
             bool isTracking = true,
+            bool isDeleted = false,
             params string[] includes)
         {
             var query = _table.AsQueryable();
@@ -63,6 +64,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
                     query = query.Include(includes[i]);
                 }
             }
+            if (isDeleted) query = query.IgnoreQueryFilters();
             return isTracking ? query : query.AsNoTracking();
         }
         public async Task<T> GetByIdAsync(int id)
