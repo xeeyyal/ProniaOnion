@@ -16,8 +16,11 @@ namespace ProniaOnionAB104.Persistence.ServiceRegistration
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IProductService, ProductService>();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProniaOnionAB104.Domain.Entities;
+using ProniaOnionAB104.Persistence.Common;
 using System.Reflection;
 
 namespace ProniaOnionAB104.Persistence.Contexts
@@ -20,8 +21,9 @@ namespace ProniaOnionAB104.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().HasQueryFilter(c => c.IsDeleted == false);
-            modelBuilder.Entity<Tag>().HasQueryFilter(c => c.IsDeleted == false);
+
+            modelBuilder.ApplyQueryFilters();
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(modelBuilder);

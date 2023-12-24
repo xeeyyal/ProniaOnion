@@ -1,11 +1,12 @@
 ﻿using ProniaApi.Application.DTOs.Tag;
+using ProniaOnionAB104.Application.DTOs.Tags;
 
 namespace ProniaOnionAB104.Application.Abstractions.Services
 {
     public interface ITagService
     {
         Task<ICollection<TagItemDto>> GetAllAsync(int page, int take);
-        //Task<GetTagDto> GetAsync(int id);
+        Task<TagGetDto> GetAsync(int id);
         Task CreateAsync(TagCreateDto tagDto);
         Task UpdateAsync(int id, TagUpdateDto tagDto);
         Task DeleteAsync(int id);

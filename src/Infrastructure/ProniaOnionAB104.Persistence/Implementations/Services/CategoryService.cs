@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProniaApi.Application.DTOs.Category;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
+using ProniaOnionAB104.Application.DTOs.Categories;
 using ProniaOnionAB104.Domain.Entities;
 
 namespace ProniaOnionAB104.Persistence.Implementations.Services
@@ -27,7 +28,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
 
         public async Task<ICollection<CategoryItemDto>> GetAllAsync(int page, int take)
         {
-            ICollection<Category> categories = await _repository.GetAllAsync(skip: (page - 1) * take, take: take, IsTracking: false,isDeleted:true).ToListAsync();
+            ICollection<Category> categories = await _repository.GetAllWhere(skip: (page - 1) * take, take: take, IsTracking: false,isDeleted:true).ToListAsync();
 
             ICollection<CategoryItemDto> categoryItemDtos = _mapper.Map<ICollection<CategoryItemDto>>(categories);
             
@@ -35,13 +36,13 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
         }
 
 
-        public async Task UpdateAsync(int id, CategoryUpdateDto updateCategoryDto)
+        public async Task UpdateAsync(int id, CategoryUpdateDto categoryUpdateDto)
         {
             Category category = await _repository.GetByIdAsync(id);
 
             if (category is null) throw new Exception("Not found");
 
-            category.Name = updateCategoryDto.Name;
+            category.Name = categoryUpdateDto.Name;
 
             _repository.Update(category);
             await _repository.SaveChangesAsync();
@@ -63,18 +64,11 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
             await _repository.SaveChangesAsync();
         }
 
-        //public async Task<CategoryItemDto> GetAsync(int id)
-        //{
-        //    Category category = await _repository.GetByIdAsync(id);
-
-        //    if (category is null) throw new Exception("Not found");
-
-        //    return new CategoryItemDto()
-        //    {
-        //        Id = category.Id,
-        //        Name = category.Name,
-        //    };
-        //}
-
+        public async Task<CategoryGetDto> GetAsync(int id)
+        {
+            Category category = await _repository.GetByIdAsync(id);
+            if (category is null) throw new Exception("Not found");
+            return new CategoryGetDto(category.Id, category.Name);
+        }
     }
 }

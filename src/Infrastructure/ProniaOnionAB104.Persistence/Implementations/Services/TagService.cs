@@ -3,6 +3,8 @@ using ProniaApi.Application.DTOs.Category;
 using ProniaApi.Application.DTOs.Tag;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
+using ProniaOnionAB104.Application.DTOs.Categories;
+using ProniaOnionAB104.Application.DTOs.Tags;
 using ProniaOnionAB104.Domain.Entities;
 
 namespace ProniaOnionAB104.Persistence.Implementations.Services
@@ -28,7 +30,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
 
         public async Task<ICollection<TagItemDto>> GetAllAsync(int page, int take)
         {
-            ICollection<Tag> tags = await _repository.GetAllAsync(skip: (page - 1) * take, take: take, IsTracking: false, isDeleted: true).ToListAsync();
+            ICollection<Tag> tags = await _repository.GetAllWhere(skip: (page - 1) * take, take: take, IsTracking: false, isDeleted: true).ToListAsync();
 
             ICollection<TagItemDto> tagItemDtos = new List<TagItemDto>();
 
@@ -66,17 +68,11 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
             await _repository.SaveChangesAsync();
         }
 
-        //public async Task<CategoryItemDto> GetAsync(int id)
-        //{
-        //    Category category = await _repository.GetByIdAsync(id);
-
-        //    if (category is null) throw new Exception("Not found");
-
-        //    return new CategoryItemDto()
-        //    {
-        //        Id = category.Id,
-        //        Name = category.Name,
-        //    };
-        //}
+        public async Task<TagGetDto> GetAsync(int id)
+        {
+            Tag tag = await _repository.GetByIdAsync(id);
+            if (tag is null) throw new Exception("Not found");
+            return new TagGetDto(tag.Id, tag.Name);
+        }
     }
 }

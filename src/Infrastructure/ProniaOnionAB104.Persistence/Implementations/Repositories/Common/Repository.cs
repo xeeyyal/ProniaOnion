@@ -16,29 +16,18 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
             _table = context.Set<T>();
             _context = context;
         }
-        public async Task AddAsync(T entity)
+        public IQueryable<T> GetAll(bool IsTracking = true, bool isDeleted = false, params string[] includes)
         {
-            await _table.AddAsync(entity);
+            IQueryable<T> query = _table;
+
+            query = _addIncludes(query, includes);
+
+            if (isDeleted) query = query.IgnoreQueryFilters();
+
+            return IsTracking ? query : query.AsNoTracking();
         }
 
-        public void Delete(T entity)
-        {
-            _table.Remove(entity);
-        }
-        public void SoftDelete(T item)
-        {
-            item.IsDeleted = true;
-            _table.Update(item);
-        }
-        public IQueryable<T> GetAllAsync(
-            Expression<Func<T, bool>>? expression = null,
-            Expression<Func<T, object>>? orderExpression = null,
-            bool isDescending = false,
-            int skip = 0,
-            int take = 0,
-            bool isTracking = true,
-            bool isDeleted = false,
-            params string[] includes)
+        public IQueryable<T> GetAllWhere(Expression<Func<T, bool>>? expression = null, Expression<Func<T, object>>? orderExpression = null, bool IsDescending = false, int skip = 0, int take = 0, bool IsTracking = true, bool isDeleted = false, params string[] includes)
         {
             var query = _table.AsQueryable();
 
@@ -49,7 +38,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
 
             if (orderExpression is not null)
             {
-                if (isDescending) query = query.OrderByDescending(orderExpression);
+                if (IsDescending) query = query.OrderByDescending(orderExpression);
                 else query = query.OrderBy(orderExpression);
             }
 
@@ -57,6 +46,71 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
 
             if (take != 0) query = query.Take(take);
 
+            query = _addIncludes(query, includes);
+
+            if (isDeleted) query = query.IgnoreQueryFilters();
+            return IsTracking ? query : query.AsNoTracking();
+        }
+
+        public async Task<T> GetByIdAsync(int id, bool IsTarcking = true, bool ignoreQuery = false, params string[] includes)
+        {
+            //var query = _table.AsQueryable();
+
+            IQueryable<T> query = _table.Where(x => x.Id == id);
+
+            query = _addIncludes(query, includes);
+
+            if (!IsTarcking) query = query.AsNoTracking();
+
+            if (ignoreQuery) query = query.IgnoreQueryFilters();
+
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression, bool IsTarcking = true, bool ignoreQuery = false, params string[] includes)
+        {
+            IQueryable<T> query = _table.Where(expression);
+
+            query = _addIncludes(query, includes);
+
+            if (!IsTarcking) query = query.AsNoTracking();
+
+            if (ignoreQuery) query = query.IgnoreQueryFilters();
+
+            return await query.SingleOrDefaultAsync();
+        }
+
+        public async Task<bool> IsExistAsync(Expression<Func<T, bool>> expression, bool ignoreQuery = false)
+        {
+            return ignoreQuery ? await _table.AnyAsync(expression) : await _table.IgnoreQueryFilters().AnyAsync(expression);
+        }
+        public async Task AddAsync(T entity)
+        {
+            await _table.AddAsync(entity);
+        }
+        public void Update(T entity)
+        {
+            _table.Update(entity);
+        }
+        public void Delete(T entity)
+        {
+            _table.Remove(entity);
+        }
+        public void ReverseSoftDelete(T entity)
+        {
+            entity.IsDeleted = false;
+        }
+        public void SoftDelete(T entity)
+        {
+            entity.IsDeleted = true;
+        }
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        private IQueryable<T> _addIncludes(IQueryable<T> query, params string[] includes)
+        {
             if (includes is not null)
             {
                 for (int i = 0; i < includes.Length; i++)
@@ -64,22 +118,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Repositories.Common
                     query = query.Include(includes[i]);
                 }
             }
-            if (isDeleted) query = query.IgnoreQueryFilters();
-            return isTracking ? query : query.AsNoTracking();
-        }
-        public async Task<T> GetByIdAsync(int id)
-        {
-            T? entity = await _table.FirstOrDefaultAsync(e => e.Id == id);
-            return entity;
-        }
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
-        public void Update(T entity)
-        {
-            _table.Update(entity);
+            return query;
         }
     }
 }
