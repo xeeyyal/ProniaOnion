@@ -1,5 +1,4 @@
-﻿using ProniaApi.Application.DTOs.Tag;
-using ProniaOnionAB104.Application.DTOs.Tags;
+﻿using ProniaOnionAB104.Application.DTOs.Tags;
 
 namespace ProniaOnionAB104.Application.Abstractions.Services
 {

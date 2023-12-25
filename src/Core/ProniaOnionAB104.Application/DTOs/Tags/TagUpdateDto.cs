@@ -1,4 +1,4 @@
-﻿namespace ProniaApi.Application.DTOs.Tag
+﻿namespace ProniaOnionAB104.Application.DTOs.Tags
 {
-	public record TagUpdateDto(string Name);
+    public record TagUpdateDto(string Name);
 }

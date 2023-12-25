@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ProniaApi.Application.DTOs.Category;
+using ProniaOnionAB104.Application.DTOs.Category;
 using ProniaOnionAB104.Application.DTOs.Categories;
 using ProniaOnionAB104.Domain.Entities;
 

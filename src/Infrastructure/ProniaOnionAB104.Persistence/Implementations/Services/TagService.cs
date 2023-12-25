@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProniaApi.Application.DTOs.Category;
-using ProniaApi.Application.DTOs.Tag;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
-using ProniaOnionAB104.Application.DTOs.Categories;
 using ProniaOnionAB104.Application.DTOs.Tags;
 using ProniaOnionAB104.Domain.Entities;
 

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProniaApi.Application.DTOs.Category;
+using ProniaOnionAB104.Application.DTOs.Category;
 
 namespace ProniaOnionAB104.Application.Validators
 {

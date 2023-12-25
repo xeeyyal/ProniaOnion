@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ProniaApi.Application.DTOs.Category;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProniaOnionAB104.Application.Abstractions.Services;
+using ProniaOnionAB104.Application.DTOs.Category;
 
 namespace ProniaOnionAB104.API.Controllers
 {

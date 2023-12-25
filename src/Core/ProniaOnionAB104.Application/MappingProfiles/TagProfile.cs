@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ProniaApi.Application.DTOs.Tag;
+using ProniaOnionAB104.Application.DTOs.Tags;
 using ProniaOnionAB104.Domain.Entities;
 
 namespace ProniaOnionAB104.Application.MappingProfiles
@@ -9,6 +9,7 @@ namespace ProniaOnionAB104.Application.MappingProfiles
         public TagProfile()
         {
             CreateMap<Tag, TagItemDto>();
+            CreateMap<Tag, TagGetDto>();
             CreateMap<TagCreateDto, Tag>();
         }
     }

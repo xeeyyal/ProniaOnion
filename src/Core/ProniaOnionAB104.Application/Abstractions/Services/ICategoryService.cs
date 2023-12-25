@@ -1,4 +1,4 @@
-﻿using ProniaApi.Application.DTOs.Category;
+﻿using ProniaOnionAB104.Application.DTOs.Category;
 using ProniaOnionAB104.Application.DTOs.Categories;
 
 namespace ProniaOnionAB104.Application.Abstractions.Services

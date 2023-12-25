@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProniaOnionAB104.Application.DTOs.Product
+﻿namespace ProniaOnionAB104.Application.DTOs.Product
 {
-    internal class ProductUpdateDto
-    {
-    }
+    public record ProductUpdateDto(string Name, decimal Price, string SKU, string? Description, int CategorId, ICollection<int> ColorIds);
 }

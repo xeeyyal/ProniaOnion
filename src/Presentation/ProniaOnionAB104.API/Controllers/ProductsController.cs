@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ProniaApi.Application.DTOs.Product;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProniaOnionAB104.Application.Abstractions.Services;
+using ProniaOnionAB104.Application.DTOs.Product;
 
 namespace ProniaOnionAB104.API.Controllers
 {
@@ -31,6 +30,21 @@ namespace ProniaOnionAB104.API.Controllers
         {
             await _service.CreateAsync(productDto);
             return StatusCode(StatusCodes.Status201Created);
+        }
+        [HttpPut("id")]
+        public async Task<IActionResult> Put(int id, [FromForm] ProductUpdateDto dto)
+        {
+            if (id <= 0) return BadRequest();
+            await _service.UpdateAsync(id, dto);
+            return NoContent();
+
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id <= 0) return StatusCode(StatusCodes.Status400BadRequest);
+            await _service.SoftDeleteAsync(id);
+            return StatusCode(StatusCodes.Status204NoContent);
         }
     }
 }

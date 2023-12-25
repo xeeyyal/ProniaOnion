@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using ProniaApi.Application.DTOs.Product;
+using ProniaOnionAB104.Application.DTOs.Product;
 
 namespace ProniaApi.Application.Validators
 {
@@ -23,6 +23,10 @@ namespace ProniaApi.Application.Validators
 				//.Must(CheckPrice);
 
 			RuleFor(p => p.Description).MaximumLength(1000);
+			RuleFor(x => x.CategoryId).Must(c => c > 0);
+
+			RuleForEach(x=>x.ColorIds).Must(c => c > 0);
+			RuleFor(x => x.ColorIds).NotEmpty();
 
 		}
 

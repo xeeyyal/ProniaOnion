@@ -1,4 +1,5 @@
-﻿namespace ProniaApi.Application.DTOs.Tag
+﻿namespace ProniaOnionAB104.Application.DTOs.Tags
+
 {
-	public record TagItemDto(int Id, string Name);
+    public record TagItemDto(int Id, string Name);
 }

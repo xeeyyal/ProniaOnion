@@ -1,4 +1,4 @@
-﻿namespace ProniaApi.Application.DTOs.Category
+﻿namespace ProniaOnionAB104.Application.DTOs.Category
 {
 	public record CategoryCreateDto(string Name);
 }

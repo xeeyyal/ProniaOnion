@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using ProniaApi.Application.DTOs.Category;
+using ProniaOnionAB104.Application.DTOs.Category;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
 using ProniaOnionAB104.Application.DTOs.Categories;
