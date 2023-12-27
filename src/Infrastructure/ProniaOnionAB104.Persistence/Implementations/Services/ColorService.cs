@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ProniaOnionAB104.Application.Abstractions.Repositories;
 using ProniaOnionAB104.Application.Abstractions.Services;
 using ProniaOnionAB104.Application.DTOs.Colors;
@@ -9,10 +10,11 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
     public class ColorService : IColorService
     {
         private readonly IColorRepository _repository;
-
-        public ColorService(IColorRepository repository)
+        private readonly IMapper _mapper;
+        public ColorService(IColorRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task CreateAsync(ColorCreateDto colorCreateDto)
@@ -43,7 +45,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
 
             if (color is null) throw new Exception("Not found");
 
-            color.Name = colorUpdateDto.Name;
+           color=_mapper.Map(colorUpdateDto,color);
 
             _repository.Update(color);
             await _repository.SaveChangesAsync();

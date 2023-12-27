@@ -21,6 +21,7 @@ namespace ProniaOnionAB104.Persistence.Common
             ApplyQuery<Product>(builder);
             ApplyQuery<Color>(builder);
             ApplyQuery<ProductColor>(builder);
+            ApplyQuery<ProductTag>(builder);
             ApplyQuery<Tag>(builder);
 
         }
