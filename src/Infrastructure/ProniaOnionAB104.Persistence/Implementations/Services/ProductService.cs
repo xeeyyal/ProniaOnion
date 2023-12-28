@@ -28,7 +28,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
                 );
             return dtos;
         }
-        public async Task<ProductGetDto> GetByIsAsync(int id)
+        public async Task<ProductGetDto> GetByIdAsync(int id)
         {
             Product product = await _repository.GetByIdAsync(id, includes: nameof(Product.Category));
             ProductGetDto dto = _mapper.Map<ProductGetDto>(product);

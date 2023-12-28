@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProniaOnionAB104.Application.Abstractions.Services;
+using ProniaOnionAB104.Application.DTOs.Tokens;
 using ProniaOnionAB104.Application.DTOs.Users;
 using ProniaOnionAB104.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,13 +16,13 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
+        private readonly ITokenHandler _handler;
         private readonly UserManager<AppUser> _userManager;
 
-        public AuthenticationService(IMapper mapper, IConfiguration configuration, UserManager<AppUser> userManager)
+        public AuthenticationService(IMapper mapper, ITokenHandler handler , UserManager<AppUser> userManager)
         {
             _mapper = mapper;
-            _configuration = configuration;
+            _handler = handler;
             _userManager = userManager;
         }
 
@@ -43,7 +44,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
                 throw new Exception(message.ToString());
             }
         }
-        public async Task<string> Login(LoginDto dto)
+        public async Task<TokenResponseDto> Login(LoginDto dto)
         {
             AppUser user = await _userManager.FindByNameAsync(dto.UserNameOrEmail);
             if (user is null)
@@ -55,38 +56,7 @@ namespace ProniaOnionAB104.Persistence.Implementations.Services
 
             if (!await _userManager.CheckPasswordAsync(user, dto.Password)) throw new Exception("Username or email,password incorrect");
 
-            List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };
-            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-
-            SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha512Signature);
-
-            JwtSecurityToken token = new JwtSecurityToken(
-                issuer: _configuration["Jwt: Issuer"],
-                audience: _configuration["Jwt: Issuer"],
-                claims: claims,
-                notBefore: DateTime.Now,
-                expires: DateTime.Now.AddHours(2),
-                signingCredentials: signingCredentials
-                );
+            return _handler.CreateJwt(user, 1);
         }
-        //private string GenerateJwtToken()
-        //{
-        //    var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourSecretKey"));
-        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        //    var token = new JwtSecurityToken(
-        //        issuer: "YourIssuer",
-        //        audience: "YourAudience",
-        //        expires: DateTime.Now.AddHours(1),
-        //        signingCredentials: credentials
-        //    );
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
-        //}
     }
 }

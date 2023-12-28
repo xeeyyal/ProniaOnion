@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProniaOnionAB104.Application.Abstractions.Services;
 using ProniaOnionAB104.Application.DTOs.Product;
 
@@ -6,6 +7,7 @@ namespace ProniaOnionAB104.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _service;
@@ -23,7 +25,7 @@ namespace ProniaOnionAB104.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(await _service.GetByIsAsync(id));
+            return Ok(await _service.GetByIdAsync(id));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] ProductCreateDto productDto)

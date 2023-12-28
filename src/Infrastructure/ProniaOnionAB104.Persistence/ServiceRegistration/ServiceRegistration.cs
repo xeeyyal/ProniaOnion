@@ -28,17 +28,6 @@ namespace ProniaOnionAB104.Persistence.ServiceRegistration
                 opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
-            //{
-            //    opt.RequireHttpsMetadata = false;
-            //    opt.SaveToken = true;
-            //    opt.TokenValidationParameters = new TokenValidationParameters()
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //    };
-            //});
-
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<IProductService, ProductService>();
